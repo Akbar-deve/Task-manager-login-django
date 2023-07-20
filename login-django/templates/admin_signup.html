@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Signup</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('{% static "image/sn.jpg" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .container {
+        max-width: 450px;
+        margin: 50px auto;
+      }
+
+      .signup-form {
+        color: white;
+        max-width: 220px;
+        margin: 50px auto;
+      }
+
+      .form-wrapper {
+        padding: 20px;
+        padding-bottom: 50px;
+        background-color: #4c7e80;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .form-submit {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .form-submit:hover {
+        background-color: #45a049;
+      }
+      /* Navbar styling */
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+      }
+
+      .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar li {
+        float: right;
+      }
+
+      .navbar li a {
+        display: block;
+        color: white;
+        padding: 16px;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .navbar li a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      .link {
+        color: white;
+      }
+      .link:hover {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="form-wrapper">
+        <h2 class="signup-form">Admin Sign Up</h2>
+
+        <form method="POST">
+          {% csrf_token %}
+          <input class="form-input" type="text" id="username" name="username" placeholder="username" required
+          />
+          <input class="form-input" type="email" id="email" name="email_id" placeholder="email_id" required />
+
+          <input type="checkbox" name="is_superuser" required /> Is Super User
+          <br>
+          <input type="checkbox" name="is_staff" required /> Is Staff User
+          <br><br>
+          <input class="form-input" type="password" id="password" name="password" placeholder="password" require />
+
+          <input type="submit" value="Sign Up" class="form-submit" />
+        </form>
+        <br />
+        <a class="link" href="{% url 'admin_login' %}" >Already have an account</a>
+
+      </div>
+     
+    </div>
+  </body>
+</html>

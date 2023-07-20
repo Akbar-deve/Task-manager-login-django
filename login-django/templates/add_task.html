@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Add Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static "image/l.webp" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+          }
+          
+          .form {
+            max-width: 300px;
+            margin: 0 auto;
+            margin-top: 70px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+          .form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+          }
+          
+          .form h2 {
+            margin-bottom: 10px;
+          }
+          
+          .input {
+            display: block;
+            width: 93%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+          }
+          
+          .add {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 auto;
+            display: block;
+          }
+          
+          .add:hover {
+            background-color: #45a049;
+          }
+       
+      
+      </style>
+</head>
+<body>
+    <div class="form">
+        <h2>Add Task</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input class="input" type="text" name="title" id="add-title" placeholder="Title" required />
+        <input class="input" type="datetime-local" name="due_date" id="due_date" required placeholder="date"/>
+        <select class="input" id="status" name="status">
+          <option  value="todo">Todo</option>
+          <option value="inprogress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+        <input type="submit" value="Add Task" class="add"/>
+    </form>
+    </div>
+</body>
+</html>

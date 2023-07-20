@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        {% comment %} h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .completed-task {
+            text-decoration: line-through;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        form input[type="text"],
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form input[type="submit"] {
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: grey;
+        } {% endcomment %}
+    </style>
+</head>
+<body>
+    <form method="post"> <!-- Form tag starts here -->
+        {% csrf_token %}
+        <!-- "Add Task" form fields -->
+        <h2>Add Task</h2>
+        <input type="text" name="title" id="add-title" required><br>
+        <input type="submit" value="Add Task">
+    </form> <!-- Form tag ends here -->
+
+    <h1>View Tasks</h1>
+    <div>
+        <div class="form">
+            <h1>Delete Task</h1>
+            <p>Are you sure you want to delete "{{ task.title }}"?</p>
+            <div class="btn-group">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+                <a href="{% url 'home' %}">Cancel</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add a dropdown select field for the status -->
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="todo" {% if task.status == 'todo' %}selected{% endif %}>Todo</option>
+                <option value="inprogress" {% if task.status == 'inprogress' %}selected{% endif %}>In Progress</option>
+                <option value="done" {% if task.status == 'done' %}selected{% endif %}>Done</option>
+            </select>
+            <input type="submit" value="Update Status">
+        </form>
+    </div>
+</body>
+</html>

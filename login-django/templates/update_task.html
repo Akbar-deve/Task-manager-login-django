@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Update Task</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url('{% static "image/l.webp" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .form {
+        max-width: 450px;
+        margin: 0 auto;
+        margin-top: 100px;
+        background-color: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+    
+
+    .input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+     .input_update{
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 0 auto; 
+        display: block;
+      }
+
+      .input_update:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+        <div class="form">
+          <h1>Update Task</h1>
+          <form method="POST">
+            {% csrf_token %}
+      
+            <input class="input" type="text" id="title" name="title" value="{{ task.title }}" required placeholder="Title" />
+            <input class="input" type="datetime-local" name="due_date" id="due_date" value="{{ task.due_date }}" required placeholder="due-date"/>
+           
+            <select class="input" id="status" name="status">
+              <option value="todo" {% if task.status == 'todo' %}selected{% endif %}>Todo</option>
+              <option value="inprogress" {% if task.status == 'inprogress' %}selected{% endif %}>In Progress</option>
+              <option value="done" {% if task.status == 'done' %}selected{% endif %}>Done</option>
+             
+      
+            <input type="submit" class="input_update" value="Update Task" />
+          </form>
+        </div>
+      </div>
+      
+  </body>
+</html>
